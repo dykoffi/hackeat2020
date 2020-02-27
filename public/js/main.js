@@ -3,8 +3,6 @@ var fond
 
 $(document).ready(() => {
     newFunction(500)
-    moment.locale('fr')
-    $("#date").text(moment().format('dddd, Do MMMM YYYY'))
 
     document.addEventListener("contextmenu", (ev) => {
         ev.preventDefault()
@@ -42,7 +40,8 @@ $(document).ready(() => {
         $("#msg").css({
             'color': "green"
         })
-        $("#butManger").attr("disabled", "none")
+        document.getElementById("butManger").disabled = false
+
         newFunction(100)
     })
 
@@ -53,29 +52,29 @@ $(document).ready(() => {
         $("#equipe").text("null")
         $("#personn").effect("shake")
 
-        $("#platTotal").text()
-        $("#platConsomme").text()
-        $("#platRestant").text()
-        $("#platImprevu").text()
+        $("#platTotal").text("")
+        $("#platConsomme").text("")
+        $("#platRestant").text("")
+        $("#platImprevu").text("")
 
         $("#msg").text("Ne peut être servi")
         $("#msg").css({
             'color': "red"
         })
-        $("#butManger").attr("disabled", "true")
+        document.getElementById("butManger").disabled = true
         newFunction(100)
     })
 })
 
 function newFunction(delay) {
-    if(fond){
+    if (fond) {
         fond.appendTo("body")
         fond.fadeIn()
         fond = null
-    }else{
+    } else {
         $('#fond').delay(delay).fadeOut(700, () => {
             fond = $('#fond').detach()
-         })
+        })
     }
-   
+
 }

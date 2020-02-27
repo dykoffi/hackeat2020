@@ -85,7 +85,7 @@ function onListening() {
 }
 var io = require("socket.io").listen(server)
 io.sockets.on("connection", function (socket, pseudo) {
-    console.log("un user c'est conneccte")
+    console.log("un user c'est connecte")
     socket.on("check", (id) => {
 
         fetch(`https://technohack20.herokuapp.com/api/eat/check/participant/${id}`)
