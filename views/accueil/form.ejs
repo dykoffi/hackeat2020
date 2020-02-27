@@ -1,51 +1,52 @@
 <div class="col-12 p-5">
     <div class="row">
-        <div class="col-5">
+        <div class="col-lg-5 col-md-12">
             <div class="">
-                <h3 class="purple-text text-center" id="date">Samedi 23 Février 2020</h3>
+                <h3 class="purple-text text-center" id="date"></h3>
             </div>
             <div class="row">
                 <div class="col-5 flex-column d-flex justify-content-center align-items-center" id="imgForm">
                     <i class="mdi-action-query-builder fa-5x"></i>
                     <h4>Matin</h4>
-                    <h5>10 : 25</h5>
+                    <h5>15 : 52</h5>
                 </div>
-                <form method="post" action="" class="col-7 white p-5 ombre">
+                <form class="col-7 white p-5 ombre">
                     <div class="form-group">
                         <label for="id" class="purple-text font-weight-bold">Identifiant</label>
-                        <input autocomplete="off" id="id" class="form-control-plaintext lighten-5 p-2 purple text-right"
+                        <input autocomplete="off" id="focus" class="form-control-plaintext lighten-5 p-2 purple text-right"
                             type="text" name="">
-                        <small class="blue-grey-text">Veuillez entrer l'identifiant du candidat</small>
+                        <small class="blue-grey-text">Veuillez entrer l'identifiant du candidat</small><br>
+                        <small class="font-weight-bold" id="msg"></small>
                     </div>
-                    <button class="btn purple white-text" type="submit" id="butVAlider">Valider</button>
+                    <button disabled="true" class="btn orange white-text mt-1" type="button" id="butManger">Servir</button>
                 </form>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-lg-3 col-md-6">
             <div class="row p-5">
                 <div id="personn" class="d-flex ombre justify-content-center flex-column text-center p-3 col-12">
                     <i class="mdi-hardware-security fa-5x text-secondary"></i>
                     <div class="text-left">
-                        <small class="grey-text">Id : </small><br>
-                        <small class="grey-text">nom : </small><br>
-                        <small class="grey-text">Equipe : </small>
+                        <small class="grey-text">Id : <b id="id"></b></small><br>
+                        <small class="grey-text">nom : <b id="nom"></b></small><br>
+                        <small class="grey-text">Equipe : <b id="equipe"></b></small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-6">
             <div class="row p-5">
                 <div class="alert alert-warning col-12 m-1" role="alert">
-                    18 plat(s) au total
+                    <b id="platTotal"></b> plat(s) au total
                 </div>
                 <div class="alert alert-info col-12 m-1" role="alert">
-                    8 plat(s) consommé(s)
+                    <b id="platConsomme"></b> plat(s) consommé(s)
                 </div>
                 <div class="alert alert-success col-12 m-1" role="alert">
-                    10 plat(s) restant(s)
+                    <b id="platRestant"></b> plat(s) restant(s)
                 </div>
                 <div class="alert alert-danger col-12 m-1" role="alert">
-                    0 plat(s) imprevu(s)
+                    <b id="platImprevu"></b> plat(s) imprevu(s)
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 var app = require('../app');
 var debug = require('debug')('serveur:server');
 var http = require('http');
-var fs = require('fs')
+var fetch = require('node-fetch')
 
 /**
  * Get port from environment and store in Express.
@@ -83,16 +83,27 @@ function onListening() {
         'port ' + addr.port;
     debug('Listening on ' + bind);
 }
-var mysql = require('mysql')
-const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'dy',
-    password: '1234',
-    database: 'xwork'
-})
 var io = require("socket.io").listen(server)
 io.sockets.on("connection", function (socket, pseudo) {
     console.log("un user c'est conneccte")
-    
+    socket.on("check", (id) => {
+
+        fetch(`https://technohack20.herokuapp.com/api/eat/check/participant/${id}`)
+            .then(res => res.json())
+            .catch(err => {
+                console.log(err)
+                socket.emit("checkBad")
+            })
+            .then(json => {
+
+                console.log(json)
+                if (json.participant) {
+                    socket.emit("checkOk", json)
+                } else {
+                    socket.emit("checkBad")
+                }
+            });
+    })
 })
+
 module.exports = io

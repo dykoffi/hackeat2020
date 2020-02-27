@@ -1,4 +1,5 @@
 body{
+    min-height: 100vh;
     overflow-x: hidden;
     background-attachment: fixed;
     background-color: black;
@@ -6,8 +7,8 @@ body{
     background-size: cover;
     background-blend-mode: screen;
 }
-#butVAlider{
-    border-radius: 50px;
+button{
+    border-radius: 50px !important;
     min-width: 5cm;
 }
 #date, .mont{
@@ -47,4 +48,19 @@ small{
     background-size: 100%;
     background-blend-mode: multiply;
     background-attachment: fixed;
+}
+
+footer{
+    position: fixed !important;
+    bottom: 0cm !important;
+}
+
+
+#fond{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.966);
+    position: fixed;
+    top: 0cm;
+    left: 0cm;
 }
