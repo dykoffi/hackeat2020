@@ -2,7 +2,6 @@ var app = require('../app');
 var debug = require('debug')('serveur:server');
 var http = require('http');
 var fetch = require('node-fetch')
-
 /**
  * Get port from environment and store in Express.
  */
@@ -86,9 +85,8 @@ function onListening() {
 var io = require("socket.io").listen(server)
 io.sockets.on("connection", function (socket, pseudo) {
     console.log("un user c'est connecte")
-    socket.on("check", (id) => {
-
-        fetch(`https://technohack20.herokuapp.com/api/eat/check/participant/${id}`)
+    socket.on("check", (jour, per, id) => {
+        fetch(`https://technohack20.herokuapp.com/api/eat/check/participant/${jour}/${per}/${id}`)
             .then(res => res.json())
             .catch(err => {
                 console.log(err)
@@ -98,10 +96,47 @@ io.sockets.on("connection", function (socket, pseudo) {
 
                 console.log(json)
                 if (json.participant) {
-                    socket.emit("checkOk", json)
+                    if (json.can_eat) {
+                        socket.emit("checkOk", json)
+                    } else {
+                        socket.emit("checkOkcant", json)
+                    }
                 } else {
                     socket.emit("checkBad")
                 }
+            });
+    })
+
+    socket.on("valider", (jour, per, id) => {
+        fetch(`https://technohack20.herokuapp.com/api/eat/register/participant/${jour}/${per}/${id}`)
+            .then(res => res.json())
+            .catch(err => {
+                console.log(err)
+            })
+            .then(json => {
+                fetch(`https://technohack20.herokuapp.com/api/eat/check/participant/${jour}/${per}/${id}`)
+                    .then(res => res.json())
+                    .catch(err => {
+                        console.log(err)
+                        socket.emit("checkBad")
+                    })
+                    .then(data => {
+                        if (json.success) {
+                            if (data.participant) {
+                                if (data.can_eat) {
+                                    socket.emit("checkOk", data)
+                                } else {
+                                    socket.emit("checkOkcant", data)
+                                }
+                            } else {
+                                socket.emit("checkBad")
+                            }
+                            socket.emit("validOk", json.message)
+                        } else {
+                            socket.emit("validBad", json.message)
+                        }
+                    });
+
             });
     })
 })
